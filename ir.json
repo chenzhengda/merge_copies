@@ -1,0 +1,1043 @@
+{
+  "maingraph": [
+    {
+      "type": "Clip",
+      "name": "",
+      "inputs": [
+        {
+          "name": "input",
+          "shape": "[1 256]",
+          "type": "INT32",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Clip:0",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "0",
+        "tileSet": "0",
+        "min": "0.000000",
+        "max": "25135.000000",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "Gather",
+      "name": "",
+      "inputs": [
+        {
+          "name": "embedding_table_0",
+          "shape": "[25136 1600]",
+          "type": "FLOAT",
+          "index": "0"
+        },
+        {
+          "name": "Clip:0",
+          "shape": "[1 256]",
+          "type": "INT32",
+          "index": "1"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Gather:0",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "0",
+        "tileSet": "0",
+        "axis": "0",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "IpuCopy",
+      "name": "",
+      "inputs": [
+        {
+          "name": "input",
+          "shape": "[1 256]",
+          "type": "INT32",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "input_c1",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "none",
+        "tileSet": "0",
+        "__sourceIpus": "[0]",
+        "__destIpu": "1",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "-inf"
+      }
+    },
+    {
+      "type": "Clip",
+      "name": "",
+      "inputs": [
+        {
+          "name": "input_c1",
+          "shape": "[1 256]",
+          "type": "INT32",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Clip:0/1",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "1",
+        "tileSet": "0",
+        "min": "25136.000000",
+        "max": "50272.000000",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "Sub",
+      "name": "",
+      "inputs": [
+        {
+          "name": "Clip:0/1",
+          "shape": "[1 256]",
+          "type": "INT32",
+          "index": "0"
+        },
+        {
+          "name": "Constant:0",
+          "shape": "[1]",
+          "type": "INT32",
+          "index": "1"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Sub:0",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "1",
+        "tileSet": "0",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "Gather",
+      "name": "",
+      "inputs": [
+        {
+          "name": "embedding_table_1",
+          "shape": "[25136 1600]",
+          "type": "FLOAT",
+          "index": "0"
+        },
+        {
+          "name": "Sub:0",
+          "shape": "[1 256]",
+          "type": "INT32",
+          "index": "1"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Gather:0/1",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "1",
+        "tileSet": "0",
+        "axis": "0",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "IpuCopy",
+      "name": "",
+      "inputs": [
+        {
+          "name": "Gather:0",
+          "shape": "[1 256 1600]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Gather:0_c1",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "none",
+        "tileSet": "0",
+        "__sourceIpus": "[0]",
+        "__destIpu": "1",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "-inf"
+      }
+    },
+    {
+      "type": "Add",
+      "name": "",
+      "inputs": [
+        {
+          "name": "Gather:0_c1",
+          "shape": "[1 256 1600]",
+          "type": "FLOAT",
+          "index": "0"
+        },
+        {
+          "name": "Gather:0/1",
+          "shape": "[1 256 1600]",
+          "type": "FLOAT",
+          "index": "1"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Add:0",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "1",
+        "tileSet": "0",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "IpuCopy",
+      "name": "",
+      "inputs": [
+        {
+          "name": "Add:0",
+          "shape": "[1 256 1600]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Add:0_c2",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "none",
+        "tileSet": "0",
+        "__sourceIpus": "[1]",
+        "__destIpu": "2",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "-inf"
+      }
+    },
+    {
+      "type": "Identity",
+      "name": "_LhsReshape:OpToIdentity",
+      "inputs": [
+        {
+          "name": "Add:0_c2",
+          "shape": "[1 256 1600]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Add:0__t0",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "2",
+        "tileSet": "0",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "MatMul",
+      "name": "",
+      "inputs": [
+        {
+          "name": "Add:0__t0",
+          "shape": "[1 256 1600]",
+          "type": "FLOAT",
+          "index": "0"
+        },
+        {
+          "name": "block0_weight__t1",
+          "shape": "[1 1600 1]",
+          "type": "FLOAT",
+          "index": "1"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MatMul:0__t2",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "2",
+        "tileSet": "0",
+        "fully_connected_pass": "0",
+        "partialsType": "MatMulPartialsType::FLOAT",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000",
+        "serialization_mode": "0",
+        "serialization_factor": "0",
+        "partialsType": "MatMulPartialsType::FLOAT"
+      }
+    },
+    {
+      "type": "Identity",
+      "name": "_OutReshape:OpToIdentity",
+      "inputs": [
+        {
+          "name": "MatMul:0__t2",
+          "shape": "[1 256 1]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MatMul:0",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "2",
+        "tileSet": "0",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "Transpose",
+      "name": "",
+      "inputs": [
+        {
+          "name": "MatMul:0",
+          "shape": "[1 256 1]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Transpose:0",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "2",
+        "tileSet": "0",
+        "perm": "[0 2 1]",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "IpuCopy",
+      "name": "",
+      "inputs": [
+        {
+          "name": "Transpose:0",
+          "shape": "[1 1 256]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Transpose:0_c3",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "none",
+        "tileSet": "0",
+        "__sourceIpus": "[2]",
+        "__destIpu": "3",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "-inf"
+      }
+    },
+    {
+      "type": "Identity",
+      "name": "_LhsReshape:OpToIdentity",
+      "inputs": [
+        {
+          "name": "Transpose:0_c3",
+          "shape": "[1 1 256]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Transpose:0__t3",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "3",
+        "tileSet": "0",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "MatMul",
+      "name": "",
+      "inputs": [
+        {
+          "name": "Transpose:0__t3",
+          "shape": "[1 1 256]",
+          "type": "FLOAT",
+          "index": "0"
+        },
+        {
+          "name": "block1_weight__t4",
+          "shape": "[1 256 1600]",
+          "type": "FLOAT",
+          "index": "1"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MatMul:0/1__t5",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "3",
+        "tileSet": "0",
+        "fully_connected_pass": "0",
+        "partialsType": "MatMulPartialsType::FLOAT",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000",
+        "serialization_mode": "0",
+        "serialization_factor": "0",
+        "partialsType": "MatMulPartialsType::FLOAT"
+      }
+    },
+    {
+      "type": "Identity",
+      "name": "_OutReshape:OpToIdentity",
+      "inputs": [
+        {
+          "name": "MatMul:0/1__t5",
+          "shape": "[1 1 1600]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MatMul:0/1",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "3",
+        "tileSet": "0",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "Reshape",
+      "name": "",
+      "inputs": [
+        {
+          "name": "MatMul:0/1",
+          "shape": "[1 1 1600]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Squeeze:0",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "3",
+        "tileSet": "0",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "Transpose",
+      "name": "",
+      "inputs": [
+        {
+          "name": "Squeeze:0",
+          "shape": "[1 1600]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Transpose:0/1",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "3",
+        "tileSet": "0",
+        "perm": "[1 0]",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "IpuCopy",
+      "name": "",
+      "inputs": [
+        {
+          "name": "Transpose:0/1",
+          "shape": "[1600 1]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Transpose:0/1_c1",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "none",
+        "tileSet": "0",
+        "__sourceIpus": "[3]",
+        "__destIpu": "1",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "-inf"
+      }
+    },
+    {
+      "type": "Reshape",
+      "name": "_RhsReshape",
+      "inputs": [
+        {
+          "name": "Transpose:0/1_c1",
+          "shape": "[1600 1]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Transpose:0/1__t10",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "1",
+        "tileSet": "0",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "MatMul",
+      "name": "",
+      "inputs": [
+        {
+          "name": "embedding_table_1__t9",
+          "shape": "[1 25136 1600]",
+          "type": "FLOAT",
+          "index": "0"
+        },
+        {
+          "name": "Transpose:0/1__t10",
+          "shape": "[1 1600 1]",
+          "type": "FLOAT",
+          "index": "1"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MatMul:0/3__t11",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "1",
+        "tileSet": "0",
+        "fully_connected_pass": "0",
+        "partialsType": "MatMulPartialsType::FLOAT",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000",
+        "serialization_mode": "0",
+        "serialization_factor": "0",
+        "partialsType": "MatMulPartialsType::FLOAT"
+      }
+    },
+    {
+      "type": "Reshape",
+      "name": "_OutReshape",
+      "inputs": [
+        {
+          "name": "MatMul:0/3__t11",
+          "shape": "[1 25136 1]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MatMul:0/3",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "1",
+        "tileSet": "0",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "TopK",
+      "name": "",
+      "inputs": [
+        {
+          "name": "MatMul:0/3",
+          "shape": "[25136 1]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TopK:0/1",
+          "index": "0"
+        },
+        {
+          "name": "TopK:1/1",
+          "index": "1"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "1",
+        "tileSet": "0",
+        "axis": "0",
+        "_K": "4",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "IpuCopy",
+      "name": "",
+      "inputs": [
+        {
+          "name": "Transpose:0/1",
+          "shape": "[1600 1]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Transpose:0/1_c0",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "none",
+        "tileSet": "0",
+        "__sourceIpus": "[3]",
+        "__destIpu": "0",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "-inf"
+      }
+    },
+    {
+      "type": "Reshape",
+      "name": "_RhsReshape",
+      "inputs": [
+        {
+          "name": "Transpose:0/1_c0",
+          "shape": "[1600 1]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Transpose:0/1__t7",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "0",
+        "tileSet": "0",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "MatMul",
+      "name": "",
+      "inputs": [
+        {
+          "name": "embedding_table_0__t6",
+          "shape": "[1 25136 1600]",
+          "type": "FLOAT",
+          "index": "0"
+        },
+        {
+          "name": "Transpose:0/1__t7",
+          "shape": "[1 1600 1]",
+          "type": "FLOAT",
+          "index": "1"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MatMul:0/2__t8",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "0",
+        "tileSet": "0",
+        "fully_connected_pass": "0",
+        "partialsType": "MatMulPartialsType::FLOAT",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000",
+        "serialization_mode": "0",
+        "serialization_factor": "0",
+        "partialsType": "MatMulPartialsType::FLOAT"
+      }
+    },
+    {
+      "type": "Reshape",
+      "name": "_OutReshape",
+      "inputs": [
+        {
+          "name": "MatMul:0/2__t8",
+          "shape": "[1 25136 1]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MatMul:0/2",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "0",
+        "tileSet": "0",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "TopK",
+      "name": "",
+      "inputs": [
+        {
+          "name": "MatMul:0/2",
+          "shape": "[25136 1]",
+          "type": "FLOAT",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TopK:0",
+          "index": "0"
+        },
+        {
+          "name": "TopK:1",
+          "index": "1"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "0",
+        "tileSet": "0",
+        "axis": "0",
+        "_K": "4",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "IpuCopy",
+      "name": "",
+      "inputs": [
+        {
+          "name": "TopK:1",
+          "shape": "[4 1]",
+          "type": "INT32",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "TopK:1_c1",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "none",
+        "tileSet": "0",
+        "__sourceIpus": "[0]",
+        "__destIpu": "1",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "-inf"
+      }
+    },
+    {
+      "type": "Concat",
+      "name": "",
+      "inputs": [
+        {
+          "name": "TopK:1_c1",
+          "shape": "[4 1]",
+          "type": "INT32",
+          "index": "0"
+        },
+        {
+          "name": "TopK:1/1",
+          "shape": "[4 1]",
+          "type": "INT32",
+          "index": "1"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Concat:0",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "1",
+        "tileSet": "0",
+        "axis": "0",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    },
+    {
+      "type": "ArgMax",
+      "name": "",
+      "inputs": [
+        {
+          "name": "Concat:0",
+          "shape": "[8 1]",
+          "type": "INT32",
+          "index": "0"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ArgMax:0",
+          "index": "0"
+        }
+      ],
+      "attributes": {
+        "recompute": "NO",
+        "__ipu_number": "1",
+        "tileSet": "0",
+        "keepdims": "1",
+        "axis": "0",
+        "__execution_phase": "none",
+        "__execution_context": "Normal",
+        "__pipeline_stage": "none",
+        "scope": "",
+        "recomputetype": "Undefined",
+        "schedulePriority": "0.000000"
+      }
+    }
+  ]
+}
